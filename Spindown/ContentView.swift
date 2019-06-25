@@ -10,7 +10,18 @@ import SwiftUI
 
 struct ContentView : View {
     var body: some View {
-        Text("Hello World")
+        VStack() {
+            
+            PlayerView()
+                .background(SwiftUI.Color.green.edgesIgnoringSafeArea(.all))
+            PlayerView()
+                .background(SwiftUI.Color.purple.edgesIgnoringSafeArea(.all))
+            
+     
+            
+        }
+        
+        
     }
 }
 
