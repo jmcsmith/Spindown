@@ -13,18 +13,34 @@ import SwiftUI
 struct PlayerView : View {
     @State var lifeTotal = 20
     var body: some View {
-        VStack() {
+        VStack(alignment: .center) {
             Text(String(lifeTotal))
-            HStack {
-                Button(action: { self.lifeTotal += 1 }) {
-                    Text("+")
-                }
+                 .font(.system(size: 80))
+                .fontWeight(.bold)
+                .multilineTextAlignment(.center)
+            HStack() {
                 Button(action: {self.lifeTotal -= 1}) {
                     Text("-")
+                        .font(.system(size: 40))
+                        .multilineTextAlignment(.trailing)
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .bottomLeading)
+                    }
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+                Button(action: { self.lifeTotal += 1 }) {
+                    Text("+")
+                         .font(.system(size: 40))
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .bottomTrailing)
+                    }
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+   
+                
                 }
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
             }
-        }
-  
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+      .padding(.all)
+        
+        
     }
 }
 

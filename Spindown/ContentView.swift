@@ -10,16 +10,32 @@ import SwiftUI
 
 struct ContentView : View {
     var body: some View {
-        VStack() {
+        VStack {
             
-            PlayerView()
-                .background(SwiftUI.Color.green.edgesIgnoringSafeArea(.all))
-            PlayerView()
-                .background(SwiftUI.Color.purple.edgesIgnoringSafeArea(.all))
+            HStack {
+                PlayerView()
+                    .background(SwiftUI.Color.red.edgesIgnoringSafeArea(.all))
+                    .rotationEffect(Angle(degrees: 180.0))
+                PlayerView()
+                    .background(SwiftUI.Color.orange.edgesIgnoringSafeArea(.all))
+                    .rotationEffect(Angle(degrees: 180.0))
+            }
+            Button(action: { print("<#T##items: Any...##Any#>")} ) {
+                Text("Reset")
+            }
+            HStack {
+                PlayerView()
+                    .background(SwiftUI.Color.green.edgesIgnoringSafeArea(.all))
+                PlayerView()
+                    .background(SwiftUI.Color.purple.edgesIgnoringSafeArea(.all))
+            }
             
-     
+            
+            
             
         }
+        
+        
         
         
     }
