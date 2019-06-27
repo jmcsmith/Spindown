@@ -20,9 +20,24 @@ struct ContentView : View {
                     .background(SwiftUI.Color.orange.edgesIgnoringSafeArea(.all))
                     .rotationEffect(Angle(degrees: 180.0))
             }
-            Button(action: { print("<#T##items: Any...##Any#>")} ) {
-                Text("Reset")
+            HStack(alignment: .center) {
+                Button(action: { print("settings tapped")} ) {
+                    Image(systemName: "gear")
+                        //.padding(.vertical, 10.0)
+                }
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                Button(action: { print("reset tapped")} ) {
+                    Image(systemName: "arrow.clockwise")
+                        //.padding(.vertical, 10.0)
+                }
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                Button(action: { print("inf tapped")} ) {
+                    Image(systemName: "info.circle")
+                        //.padding(.vertical, 10.0)
+                }
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             }
+           .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 20, alignment: .center)
             HStack {
                 PlayerView()
                     .background(SwiftUI.Color.green.edgesIgnoringSafeArea(.all))

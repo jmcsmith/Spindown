@@ -13,11 +13,14 @@ import SwiftUI
 struct PlayerView : View {
     @State var lifeTotal = 20
     var body: some View {
-        VStack(alignment: .center) {
+        ZStack(alignment: .center) {
             Text(String(lifeTotal))
-                 .font(.system(size: 80))
+          
+                 .font(.system(size: 120))
+                
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
+             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             HStack() {
                 Button(action: {self.lifeTotal -= 1}) {
                     Text("-")
