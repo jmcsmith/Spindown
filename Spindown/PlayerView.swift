@@ -16,7 +16,7 @@ struct PlayerView : View {
         ZStack(alignment: .center) {
             Text(String(lifeTotal))
           
-                 .font(.system(size: 120))
+                 .font(.system(size: 90))
                 
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
