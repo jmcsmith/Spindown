@@ -14,6 +14,7 @@
 		EEA8988622B19CE5008EEC0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEA8988522B19CE5008EEC0D /* Assets.xcassets */; };
 		EEA8988922B19CE5008EEC0D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEA8988822B19CE5008EEC0D /* Preview Assets.xcassets */; };
 		EEA8988C22B19CE5008EEC0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEA8988A22B19CE5008EEC0D /* LaunchScreen.storyboard */; };
+		EEB795BB2302143600CFCF99 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB795BA2302143600CFCF99 /* InfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		EEA8988B22B19CE5008EEC0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EEA8988D22B19CE5008EEC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEA8989322B19D06008EEC0D /* Spindown.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Spindown.entitlements; sourceTree = "<group>"; };
+		EEB795BA2302143600CFCF99 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				EEA8988D22B19CE5008EEC0D /* Info.plist */,
 				EEA8988722B19CE5008EEC0D /* Preview Content */,
 				EE35A37022C27D87006943D9 /* PlayerView.swift */,
+				EEB795BA2302143600CFCF99 /* InfoView.swift */,
 			);
 			path = Spindown;
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 				EEA8988022B19CE2008EEC0D /* AppDelegate.swift in Sources */,
 				EEA8988222B19CE2008EEC0D /* SceneDelegate.swift in Sources */,
 				EEA8988422B19CE2008EEC0D /* ContentView.swift in Sources */,
+				EEB795BB2302143600CFCF99 /* InfoView.swift in Sources */,
 				EE35A37122C27D87006943D9 /* PlayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

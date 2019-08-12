@@ -11,18 +11,20 @@ import SwiftUI
 struct ContentView : View {
     @State var playerCount = 2
     @State var showingSheet = false
+    @State var showingInfo = false
+
     
     var playerSheet: ActionSheet {
         ActionSheet(title: Text("Number of Players"), message: nil, buttons: [.default(Text("2"), action: {
             self.playerCount = 2
             self.showingSheet = false
         }),.default(Text("3"), action: {
-                    self.playerCount = 3
-                    self.showingSheet = false
-                }),.default(Text("4"), action: {
-                                    self.playerCount = 4
-                                    self.showingSheet = false
-                }) ])
+            self.playerCount = 3
+            self.showingSheet = false
+        }),.default(Text("4"), action: {
+            self.playerCount = 4
+            self.showingSheet = false
+        }) ])
     }
     
     var body: some View {
@@ -43,31 +45,24 @@ struct ContentView : View {
             .edgesIgnoringSafeArea(.top)
             HStack(alignment: .center) {
                 
-//                Button(action: {
-//                    self.showingSheet = true
-//                    
-//                }) {
-//                    Image(systemName: "gear")
-//                }
-//                .sheet(isPresented: $showingSheet, content: playerSheet)
                 Button(action: { self.showingSheet = true } ) {
-                       Image(systemName: "gear")
-                    }.actionSheet(isPresented: $showingSheet, content: {
-                        self.playerSheet
-                    })
-                    //.padding(.vertical, 10.0)
-                    
+                    Image(systemName: "gear")
+                }.actionSheet(isPresented: $showingSheet, content: {
+                    self.playerSheet
+                })
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                 Button(action: { print("reset tapped")} ) {
                     Image(systemName: "arrow.clockwise")
-                    //.padding(.vertical, 10.0)
                 }
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-                Button(action: { print("inf tapped")} ) {
+                Button(action: { self.showingInfo = true } ) {
                     Image(systemName: "info.circle")
                     //.padding(.vertical, 10.0)
-                }
+                    }.sheet(isPresented: $showingInfo, content: {
+                        InfoView()
+                    })
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+            
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 20, alignment: .center)
             HStack {
@@ -78,15 +73,7 @@ struct ContentView : View {
                         .background(SwiftUI.Color.purple.edgesIgnoringSafeArea(.all))
                 }
             }
-            
-            
-            
-            
         }
-        
-        
-        
-        
     }
 }
 
