@@ -13,16 +13,16 @@ struct ContentView : View {
     @State var showingSheet = false
     
     var playerSheet: ActionSheet {
-        ActionSheet(title: Text("Number of Players"), message: nil, buttons: [.default(Text("2"), onTrigger: {
+        ActionSheet(title: Text("Number of Players"), message: nil, buttons: [.default(Text("2"), action: {
             self.playerCount = 2
             self.showingSheet = false
-        }),.default(Text("3"), onTrigger: {
+        }),.default(Text("3"), action: {
                     self.playerCount = 3
                     self.showingSheet = false
-                }),.default(Text("4"), onTrigger: {
+                }),.default(Text("4"), action: {
                                     self.playerCount = 4
                                     self.showingSheet = false
-                                })])
+                }) ])
     }
     
     var body: some View {
@@ -30,15 +30,17 @@ struct ContentView : View {
         VStack {
             
             HStack {
-                PlayerView()
-                    .background(SwiftUI.Color.red.edgesIgnoringSafeArea(.all))
+                PlayerView(buttonPadding: true)
+                    .background(Color.red.edgesIgnoringSafeArea(.all))
                     .rotationEffect(Angle(degrees: 180.0))
+                
                 if playerCount > 2 {
-                    PlayerView()
-                        .background(SwiftUI.Color.orange.edgesIgnoringSafeArea(.all))
+                    PlayerView(buttonPadding: true)
+                        .background(Color.orange.edgesIgnoringSafeArea(.all))
                         .rotationEffect(Angle(degrees: 180.0))
                 }
             }
+            .edgesIgnoringSafeArea(.top)
             HStack(alignment: .center) {
                 
 //                Button(action: {
@@ -69,10 +71,10 @@ struct ContentView : View {
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 20, alignment: .center)
             HStack {
-                PlayerView()
+                PlayerView(buttonPadding: false)
                     .background(SwiftUI.Color.green.edgesIgnoringSafeArea(.all))
                 if playerCount > 3 {
-                    PlayerView()
+                    PlayerView(buttonPadding: false)
                         .background(SwiftUI.Color.purple.edgesIgnoringSafeArea(.all))
                 }
             }
