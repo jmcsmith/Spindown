@@ -11,10 +11,12 @@ import SwiftUI
 
 
 struct PlayerView : View {
+    
     @State var lifeTotal = 20
     var buttonPadding: Bool = false
     init(buttonPadding: Bool) {
         self.buttonPadding = buttonPadding
+        
     }
     
     
@@ -41,8 +43,9 @@ struct PlayerView : View {
                         .font(.system(size: 40))
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .bottomTrailing)
                 }
+            
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-                
+                    
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: buttonPadding ? 44 : 0, trailing: 0))
                 
                 
@@ -52,8 +55,6 @@ struct PlayerView : View {
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
         .padding(.all)
-        
-        
     }
 }
 
