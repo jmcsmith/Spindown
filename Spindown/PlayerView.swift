@@ -14,9 +14,14 @@ struct PlayerView : View {
     
     @State var lifeTotal = 20
     var buttonPadding: Bool = false
+    var paddingAmount: CGFloat = 0
     init(buttonPadding: Bool) {
         self.buttonPadding = buttonPadding
-        
+        if DeviceTypes.isiPhoneXAspectRatio() {
+            paddingAmount = 44
+        } else {
+            paddingAmount = 20
+        }
     }
     
     
@@ -37,7 +42,7 @@ struct PlayerView : View {
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .bottomLeading)
                 }
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-                .padding(EdgeInsets(top: 0, leading: 0, bottom: buttonPadding ? 44 : 0, trailing: 0))
+                .padding(EdgeInsets(top: 0, leading: 0, bottom: buttonPadding ? paddingAmount : 0, trailing: 0))
                 Button(action: { self.lifeTotal += 1 }) {
                     Text("+")
                         .font(.system(size: 40))
@@ -46,7 +51,7 @@ struct PlayerView : View {
             
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                     
-                .padding(EdgeInsets(top: 0, leading: 0, bottom: buttonPadding ? 44 : 0, trailing: 0))
+                .padding(EdgeInsets(top: 0, leading: 0, bottom: buttonPadding ? paddingAmount : 0, trailing: 0))
                 
                 
             }
@@ -65,3 +70,4 @@ struct PlayerView_Previews : PreviewProvider {
     }
 }
 #endif
+
