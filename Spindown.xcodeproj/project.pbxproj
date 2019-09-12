@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		EE35A37122C27D87006943D9 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35A37022C27D87006943D9 /* PlayerView.swift */; };
 		EE633046230F26C20009E104 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE633045230F26C20009E104 /* Constants.swift */; };
+		EE633049230F38B40009E104 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE633048230F38B40009E104 /* StoreKit.framework */; };
 		EEA8988022B19CE2008EEC0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8987F22B19CE2008EEC0D /* AppDelegate.swift */; };
 		EEA8988222B19CE2008EEC0D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8988122B19CE2008EEC0D /* SceneDelegate.swift */; };
 		EEA8988422B19CE2008EEC0D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8988322B19CE2008EEC0D /* ContentView.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		EE35A37022C27D87006943D9 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		EE633045230F26C20009E104 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EE633048230F38B40009E104 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		EEA8987C22B19CE2008EEC0D /* Spindown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spindown.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEA8987F22B19CE2008EEC0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEA8988122B19CE2008EEC0D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,17 +44,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE633049230F38B40009E104 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EE633047230F38B40009E104 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EE633048230F38B40009E104 /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EEA8987322B19CE2008EEC0D = {
 			isa = PBXGroup;
 			children = (
 				EEA8987E22B19CE2008EEC0D /* Spindown */,
 				EEA8987D22B19CE2008EEC0D /* Products */,
+				EE633047230F38B40009E104 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -320,6 +332,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.Spindown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -344,6 +357,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.Spindown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -12,8 +12,9 @@ struct ContentView : View {
     @State var playerCount = 2
     @State var showingSheet = false
     @State var showingInfo = false
-    
-    @State var reset = false
+    @State var showingPopover = false
+
+    @EnvironmentObject var manager: ScoreManager
     
     var playerSheet: ActionSheet {
         ActionSheet(title: Text("Number of Players"), message: nil, buttons: [.default(Text("2"), action: {
@@ -25,9 +26,10 @@ struct ContentView : View {
         }),.default(Text("4"), action: {
             self.playerCount = 4
             self.showingSheet = false
-        }) ])
+        }), .cancel() ])
         
     }
+
     
     var body: some View {
         
@@ -45,16 +47,16 @@ struct ContentView : View {
                 }
             }
             .edgesIgnoringSafeArea(.top)
+            
             HStack(alignment: .center) {
-                
-                Button(action: { self.showingSheet = true } ) {
-                    Image(systemName: "person.3")
-                }.actionSheet(isPresented: $showingSheet, content: {
-                    self.playerSheet
-                })
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                    Button(action: { self.showingSheet = true } ) {
+                        Image(systemName: "person.3")
+                    }.actionSheet(isPresented: $showingSheet, content: {
+                        self.playerSheet
+                    })
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                 Button(action: {
-                    self.reset = true
+                    self.manager.reset.toggle()
                     print("reset tapped")} ) {
                         Image(systemName: "arrow.clockwise")
                 }
@@ -81,7 +83,20 @@ struct ContentView : View {
         }
     }
 }
-
+final class ScoreManager: ObservableObject {
+    @Published var reset = false{
+        didSet{
+            for i in 0..<scores.count{
+                scores[i].data = 20
+            }
+        }
+    }
+    @Published var scores = [Score]()
+}
+struct Score{
+    var data = 20
+    var id = UUID()
+}
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
