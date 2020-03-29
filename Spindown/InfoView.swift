@@ -14,6 +14,7 @@ struct InfoView: View {
     var body: some View {
         NavigationView {
             List {
+                #if !targetEnvironment(macCatalyst)
                 Section(header: Text("Icons"), footer: Text("")) {
                     HStack {
                         Image("light")
@@ -63,13 +64,14 @@ struct InfoView: View {
                     }
                     
                 }
+                #endif
                 Section(header: Text("About")) {
                     HStack {
                         Image("privacy")
                             .resizable()
                             .frame(width: 20, height: 20, alignment: .center)
                         Button(action: {
-                            if let url = URL(string: "http://www.mymtg.app/privacy"){
+                            if let url = URL(string: "https://www.roboticsnailsoftware.com/sd/privacy.html"){
                                 UIApplication.shared.open(url, options:[:], completionHandler: nil)
                             }}) {
                                 Text("Privacy")

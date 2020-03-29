@@ -12,8 +12,8 @@ import SwiftUI
 
 struct PlayerView : View {
     @EnvironmentObject var manager: ScoreManager
-     var score = Score()
-       @State var scoreIndex = 0
+    var score = Score()
+    @State var scoreIndex = 0
     @State var lifeTotal = 20
     @State var localReset = true
     var buttonPadding: Bool = true
@@ -25,12 +25,12 @@ struct PlayerView : View {
         } else {
             paddingAmount = 20
         }
-
+        
     }
     
     
     var body: some View {
-  
+        
         ZStack(alignment: .center) {
             Text(String(self.manager.scores.isEmpty ? "20" : self.manager.scores[self.scoreIndex].data.description))
                 
@@ -41,10 +41,10 @@ struct PlayerView : View {
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             HStack() {
                 Button(action: {
-                   
+                    
                     self.manager.scores[self.scoreIndex].data -= 1
-
-                  
+                    
+                    
                     
                 }) {
                     Text("-")
@@ -55,9 +55,9 @@ struct PlayerView : View {
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: buttonPadding ? paddingAmount : 0, trailing: 0))
                 Button(action: {
-                   
+                    
                     self.manager.scores[self.scoreIndex].data += 1
-                  
+                    
                     
                 }) {
                     Text("+")
@@ -77,9 +77,9 @@ struct PlayerView : View {
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
         .padding(.all)
         .onAppear{
-                   self.manager.scores.append(self.score)
-                   self.scoreIndex = self.manager.scores.firstIndex(where: {$0.id == self.score.id})!
-               }
+            self.manager.scores.append(self.score)
+            self.scoreIndex = self.manager.scores.firstIndex(where: {$0.id == self.score.id})!
+        }
     }
 }
 

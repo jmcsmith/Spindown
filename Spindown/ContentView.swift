@@ -56,7 +56,7 @@ struct ContentView : View {
                     })
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                 Button(action: {
-                    self.manager.reset.toggle()
+                    self.manager.reset = true
                     print("reset tapped")} ) {
                         Image(systemName: "arrow.clockwise")
                 }
@@ -84,13 +84,17 @@ struct ContentView : View {
     }
 }
 final class ScoreManager: ObservableObject {
-    @Published var reset = false{
+    @Published var reset: Bool = false {
         didSet{
-            for i in 0..<scores.count{
-                scores[i].data = 20
+            if reset == true {
+                for i in 0..<scores.count{
+                    scores[i].data = 20
+                }
+                reset = false
             }
         }
     }
+
     @Published var scores = [Score]()
 }
 struct Score{
