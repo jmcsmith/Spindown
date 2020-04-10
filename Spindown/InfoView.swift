@@ -7,10 +7,11 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct InfoView: View {
     @Binding var showingModal:Bool
-@State var icon = UIApplication.shared.alternateIconName
+    @State var icon = UIApplication.shared.alternateIconName
     var body: some View {
         NavigationView {
             List {
@@ -35,8 +36,8 @@ struct InfoView: View {
                                 .foregroundColor(.primary)
                         }
                         if icon != "AppIcon-2" {
-                        Image(systemName: "checkmark")
-                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
+                            Image(systemName: "checkmark")
+                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
                         }
                     }
                     HStack {
@@ -58,9 +59,9 @@ struct InfoView: View {
                                 .foregroundColor(.primary)
                         }
                         if icon == "AppIcon-2" {
-                                              Image(systemName: "checkmark")
-                                                  .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
-                                              }
+                            Image(systemName: "checkmark")
+                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
+                        }
                     }
                     
                 }
@@ -102,6 +103,17 @@ struct InfoView: View {
                             }}) {
                                 Text("Website - RoboticSnailSoftware.com")
                                     .foregroundColor(.primary)
+                        }
+                    }
+                    HStack {
+                        Image(systemName: "star.fill")
+                            .resizable()
+                            .frame(width: 20, height: 20, alignment: .center)
+                        Button(action: {
+                            SKStoreReviewController.requestReview()
+                        }) {
+                            Text("Rate Spindown")
+                                .foregroundColor(.primary)
                         }
                     }
                 }
