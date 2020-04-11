@@ -18,13 +18,20 @@ struct ContentView : View {
     
     var playerSheet: ActionSheet {
         ActionSheet(title: Text("Number of Players"), message: nil, buttons: [.default(Text("2"), action: {
+            
+            self.manager.reset = true
             self.playerCount = 2
+        
             self.showingSheet = false
         }),.default(Text("3"), action: {
+            self.manager.reset = true
             self.playerCount = 3
+            
             self.showingSheet = false
         }),.default(Text("4"), action: {
+            self.manager.reset = true
             self.playerCount = 4
+            
             self.showingSheet = false
         }), .cancel() ])
         
@@ -67,6 +74,7 @@ struct ContentView : View {
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                         GeometryReader { geometry in
                             Button(action: {
+                                self.manager.reset = true
                                 self.playerCount = 2
                                 self.showingSheet = false
                             }) {
@@ -86,6 +94,7 @@ struct ContentView : View {
                         .padding()
                         GeometryReader { geometry in
                             Button(action: {
+                                self.manager.reset = true
                                 self.playerCount = 3
                                 self.showingSheet = false
                             }) {
@@ -104,6 +113,7 @@ struct ContentView : View {
                         } .padding()
                         GeometryReader { geometry in
                             Button(action: {
+                                self.manager.reset = true
                                 self.playerCount = 4
                                 self.showingSheet = false
                             }) {
