@@ -169,8 +169,9 @@ final class ScoreManager: ObservableObject {
     @Published var reset: Bool = false {
         didSet{
             if reset == true {
+                 let defaults = UserDefaults.standard
                 for i in 0..<scores.count{
-                    scores[i].data = 20
+                    scores[i].data = defaults.integer(forKey: "startingHealth")
                 }
                 reset = false
             }
@@ -180,7 +181,7 @@ final class ScoreManager: ObservableObject {
     @Published var scores = [Score]()
 }
 struct Score{
-    var data = 20
+    var data = 0
     var id = UUID()
 }
 #if DEBUG

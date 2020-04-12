@@ -15,6 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let defaults = UserDefaults.standard
+        let startingHealth = defaults.integer(forKey: "startingHealth")
+        if startingHealth == 0 {
+            defaults.set(20, forKey: "startingHealth")
+        }
         return true
     }
     

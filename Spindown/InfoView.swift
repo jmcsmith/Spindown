@@ -12,9 +12,34 @@ import StoreKit
 struct InfoView: View {
     @Binding var showingModal:Bool
     @State var icon = UIApplication.shared.alternateIconName
+    let defaults = UserDefaults.standard
+    @State var current = 0
+    
     var body: some View {
         NavigationView {
             List {
+                Section(header: Text("Settings"), footer: Text("")) {
+                    HStack {
+                        Image(systemName: "heart.fill")
+                            .resizable()
+                            .frame(width: 20, height: 20, alignment: .center)
+                        Text("Starting Life")
+                        Spacer()
+                        Text("- " + self.current.description)
+                        Stepper("", onIncrement: {
+                            var current = self.defaults.integer(forKey: "startingHealth")
+                            current += 1
+                            self.current = current
+                            self.defaults.set(current, forKey: "startingHealth")
+                        }, onDecrement: {
+                            var current = self.defaults.integer(forKey: "startingHealth")
+                            current -= 1
+                            self.current = current
+                            self.defaults.set(current, forKey: "startingHealth")
+                        })
+                        
+                    }
+                }
                 #if !targetEnvironment(macCatalyst)
                 Section(header: Text("Icons"), footer: Text("")) {
                     HStack {
@@ -128,7 +153,9 @@ struct InfoView: View {
             })
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .onAppear { self.current = self.defaults.integer(forKey: "startingHealth") }
     }
+
 }
 
 #if DEBUG

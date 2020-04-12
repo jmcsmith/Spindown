@@ -14,11 +14,16 @@ struct PlayerView : View {
     @EnvironmentObject var manager: ScoreManager
     var score = Score()
     @State var scoreIndex = 0
-    @State var lifeTotal = 20
-    @State var localReset = true
     var buttonPadding: Bool = true
     var paddingAmount: CGFloat = 0
+    let defaults = UserDefaults.standard
+    var startingLife: Int {
+        get{
+            return defaults.integer(forKey: "startingHealth")
+        }
+    }
     init(buttonPadding: Bool) {
+        score.data = startingLife
         self.buttonPadding = buttonPadding
         if DeviceTypes.isiPhoneXAspectRatio() {
             paddingAmount = 44
@@ -32,7 +37,7 @@ struct PlayerView : View {
     var body: some View {
         
         ZStack(alignment: .center) {
-            Text(String(self.manager.scores.isEmpty ? "20" : self.manager.scores[self.scoreIndex].data.description))
+            Text(String(self.manager.scores.isEmpty ? startingLife.description : self.manager.scores[self.scoreIndex].data.description))
                 
                 .font(.system(size: 90))
                 .foregroundColor(Color.init("LifeTotal"))
