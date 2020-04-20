@@ -36,6 +36,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-    
-    
+    override func buildMenu(with builder: UIMenuBuilder) {
+        super.buildMenu(with: builder)
+        
+        builder.remove(menu: .services)
+        builder.remove(menu: .format)
+        builder.remove(menu: .toolbar)
+    }
+    @IBAction func showHelp(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://www.roboticsnailsoftware.com")!)
+    }
+
+    // Return whether action can be performed.
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+
+        if action == #selector(self.showHelp(_:)) {
+            return true
+        } else {
+            return super.canPerformAction(action, withSender: sender)
+        }
+    }
 }

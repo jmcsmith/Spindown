@@ -143,10 +143,10 @@ struct ContentView : View {
                     
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                 Button(action: { self.showingInfo = true } ) {
-                    Image(systemName: "info.circle")
+                    Image(systemName: "gear")
                     //.padding(.vertical, 10.0)
                 }.sheet(isPresented: $showingInfo, content: {
-                    InfoView(showingModal: self.$showingInfo)
+                    InfoView(showingModal: self.$showingInfo).environmentObject(self.manager)
                 })
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                 

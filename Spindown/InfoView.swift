@@ -14,30 +14,77 @@ struct InfoView: View {
     @State var icon = UIApplication.shared.alternateIconName
     let defaults = UserDefaults.standard
     @State var current = 0
+    @EnvironmentObject var manager: ScoreManager
     
     var body: some View {
         NavigationView {
             List {
                 Section(header: Text("Settings"), footer: Text("")) {
-                    HStack {
-                        Image(systemName: "heart.fill")
-                            .resizable()
-                            .frame(width: 20, height: 20, alignment: .center)
-                        Text("Starting Life")
-                        Spacer()
-                        Text("- " + self.current.description)
-                        Stepper("", onIncrement: {
-                            var current = self.defaults.integer(forKey: "startingHealth")
-                            current += 1
-                            self.current = current
-                            self.defaults.set(current, forKey: "startingHealth")
-                        }, onDecrement: {
-                            var current = self.defaults.integer(forKey: "startingHealth")
-                            current -= 1
-                            self.current = current
-                            self.defaults.set(current, forKey: "startingHealth")
-                        })
-                        
+                    VStack{
+                        HStack {
+                            Image(systemName: "heart.fill")
+                                .resizable()
+                                .frame(width: 20, height: 20, alignment: .center)
+                            Text("Starting Life")
+                            Spacer()
+                            Text("- " + self.current.description)
+                            Stepper("", onIncrement: {
+                                var current = self.defaults.integer(forKey: "startingHealth")
+                                current += 1
+                                self.current = current
+                                self.defaults.set(current, forKey: "startingHealth")
+                                self.manager.reset = true
+                            }, onDecrement: {
+                                var current = self.defaults.integer(forKey: "startingHealth")
+                                current -= 1
+                                self.current = current
+                                self.defaults.set(current, forKey: "startingHealth")
+                                self.manager.reset = true
+                            })
+                            
+                        }
+                        HStack {
+                            
+                            
+                            
+                            Text("20")
+                                .foregroundColor(Color.white)
+                                
+                                .padding()
+                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                                .background(Color.gray)
+                                .cornerRadius(10)
+                                .onTapGesture {
+                                    self.current = 20
+                                    self.defaults.set(20, forKey: "startingHealth")
+                                    self.manager.reset = true
+                            }
+                            Text("30")
+                                .foregroundColor(Color.white)
+                                
+                                .padding()
+                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                                .background(Color.gray)
+                                .cornerRadius(10)
+                                .onTapGesture {
+                                    self.current = 30
+                                    self.defaults.set(30, forKey: "startingHealth")
+                                    self.manager.reset = true
+                            }
+                            Text("40")
+                                .foregroundColor(Color.white)
+                                
+                                .padding()
+                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                                .background(Color.gray)
+                                .cornerRadius(10)
+                                .onTapGesture {
+                                    self.current = 40
+                                    self.defaults.set(40, forKey: "startingHealth")
+                                    self.manager.reset = true
+                            }
+                        }
+                                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                     }
                 }
                 #if !targetEnvironment(macCatalyst)
@@ -155,7 +202,7 @@ struct InfoView: View {
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear { self.current = self.defaults.integer(forKey: "startingHealth") }
     }
-
+    
 }
 
 #if DEBUG
