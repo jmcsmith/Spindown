@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct ContentView : View {
     @State var playerCount = 2
@@ -15,13 +16,22 @@ struct ContentView : View {
     @State var showingPopover = false
     
     @EnvironmentObject var manager: ScoreManager
+    @StateObject var storeManager = StoreManager ()
+    
+    let productIDs = [
+        //Use your product IDs instead
+        "coffeeTip1",
+        "lunchTip",
+        "dinnerTip",
+        "m1Mac"
+    ]
     
     var playerSheet: ActionSheet {
         ActionSheet(title: Text("Number of Players"), message: nil, buttons: [.default(Text("2"), action: {
             
             self.manager.reset = true
             self.playerCount = 2
-        
+            
             self.showingSheet = false
         }),.default(Text("3"), action: {
             self.manager.reset = true
@@ -40,7 +50,7 @@ struct ContentView : View {
     
     var body: some View {
         
-        VStack {
+        VStack(alignment: .center, spacing: 0) {
             
             HStack {
                 PlayerView(buttonPadding: true)
@@ -62,7 +72,7 @@ struct ContentView : View {
                 }.actionSheet(isPresented: $showingSheet, content: {
                     self.playerSheet
                 })
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                 #else
                 Button(action: { self.showingSheet = true } ) {
                     Image(systemName: "person.3")
@@ -82,14 +92,14 @@ struct ContentView : View {
                                     .frame(
                                         minWidth: (geometry.size.width / 2) - 25,
                                         maxWidth: .infinity, minHeight: 44
-                                )
+                                    )
                                     .font(Font.subheadline.weight(.bold))
                                     .background(Color.gray).opacity(0.8)
                                     .foregroundColor(Color.white)
                                     .cornerRadius(12)
                             }    .lineLimit(2)
-                                .multilineTextAlignment(.center)
-                                //.padding([.leading,.trailing], 5)
+                            .multilineTextAlignment(.center)
+                            //.padding([.leading,.trailing], 5)
                         }
                         .padding()
                         GeometryReader { geometry in
@@ -102,14 +112,14 @@ struct ContentView : View {
                                     .frame(
                                         minWidth: (geometry.size.width / 2) - 25,
                                         maxWidth: .infinity, minHeight: 44
-                                )
+                                    )
                                     .font(Font.subheadline.weight(.bold))
                                     .background(Color.gray).opacity(0.8)
                                     .foregroundColor(Color.white)
                                     .cornerRadius(12)
                             }.lineLimit(2)
-                                .multilineTextAlignment(.center)
-                           
+                            .multilineTextAlignment(.center)
+                            
                         } .padding()
                         GeometryReader { geometry in
                             Button(action: {
@@ -121,37 +131,45 @@ struct ContentView : View {
                                     .frame(
                                         minWidth: (geometry.size.width / 2) - 25,
                                         maxWidth: .infinity, minHeight: 44
-                                )
+                                    )
                                     .font(Font.subheadline.weight(.bold))
                                     .background(Color.gray).opacity(0.8)
                                     .foregroundColor(Color.white)
                                     .cornerRadius(12)
                             }.lineLimit(2)
-                                .multilineTextAlignment(.center)
-                              
+                            .multilineTextAlignment(.center)
+                            
                         } .padding()
                     }.padding()
-                        .background(Color.gray.opacity(0.2))
+                    .background(Color.gray.opacity(0.2))
                 })
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                 #endif
                 Button(action: {
-                    self.manager.reset = true
-                    print("reset tapped")} ) {
-                        Image(systemName: "arrow.clockwise")
+                        self.manager.reset = true
+                        print("reset tapped")} ) {
+                    Image(systemName: "arrow.clockwise")
                 }
-                    
+                
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                 Button(action: { self.showingInfo = true } ) {
                     Image(systemName: "gear")
                     //.padding(.vertical, 10.0)
                 }.sheet(isPresented: $showingInfo, content: {
-                    InfoView(showingModal: self.$showingInfo).environmentObject(self.manager)
+                    InfoView(showingModal: self.$showingInfo, storeManager: storeManager).environmentObject(self.manager)
+                        .onAppear {
+                            
+                            if !(storeManager.myProducts.count > 0) {
+                                SKPaymentQueue.default().add(storeManager)
+                                storeManager.getProducts(productIDs: productIDs)
+                            }
+                        }
                 })
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                 
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 20, alignment: .center)
+            .padding(3)
             HStack {
                 PlayerView(buttonPadding: false)
                     .background(SwiftUI.Color.green.edgesIgnoringSafeArea(.all))
@@ -169,7 +187,7 @@ final class ScoreManager: ObservableObject {
     @Published var reset: Bool = false {
         didSet{
             if reset == true {
-                 let defaults = UserDefaults.standard
+                let defaults = UserDefaults.standard
                 for i in 0..<scores.count{
                     scores[i].data = defaults.integer(forKey: "startingHealth")
                 }
@@ -191,3 +209,20 @@ struct ContentView_Previews : PreviewProvider {
     }
 }
 #endif
+struct DebugBorder: ViewModifier {
+    let color: Color
+    
+    func body(content: Content) -> some View {
+        content.overlay(Rectangle().stroke(color))
+    }
+}
+
+extension View {
+    func debugBorder(color: Color = .blue) -> some View {
+        #if DEBUG
+        return self.overlay(Rectangle().stroke(color))
+        #else
+        return self
+        #endif
+    }
+}

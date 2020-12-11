@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		EE35A37122C27D87006943D9 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35A37022C27D87006943D9 /* PlayerView.swift */; };
 		EE633046230F26C20009E104 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE633045230F26C20009E104 /* Constants.swift */; };
-		EE633049230F38B40009E104 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE633048230F38B40009E104 /* StoreKit.framework */; };
+		EE9B957C2582F29B00726F08 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE9B957B2582F29B00726F08 /* StoreKit.framework */; };
+		EE9B95822582F54900726F08 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9B95812582F54900726F08 /* StoreManager.swift */; };
 		EEA8988022B19CE2008EEC0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8987F22B19CE2008EEC0D /* AppDelegate.swift */; };
 		EEA8988222B19CE2008EEC0D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8988122B19CE2008EEC0D /* SceneDelegate.swift */; };
 		EEA8988422B19CE2008EEC0D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA8988322B19CE2008EEC0D /* ContentView.swift */; };
@@ -24,7 +25,8 @@
 /* Begin PBXFileReference section */
 		EE35A37022C27D87006943D9 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		EE633045230F26C20009E104 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		EE633048230F38B40009E104 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		EE9B957B2582F29B00726F08 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		EE9B95812582F54900726F08 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		EEA8987C22B19CE2008EEC0D /* Spindown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spindown.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEA8987F22B19CE2008EEC0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEA8988122B19CE2008EEC0D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,7 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE633049230F38B40009E104 /* StoreKit.framework in Frameworks */,
+				EE9B957C2582F29B00726F08 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,7 +56,7 @@
 		EE633047230F38B40009E104 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EE633048230F38B40009E104 /* StoreKit.framework */,
+				EE9B957B2582F29B00726F08 /* StoreKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -92,6 +94,7 @@
 				EE35A37022C27D87006943D9 /* PlayerView.swift */,
 				EEB795BA2302143600CFCF99 /* InfoView.swift */,
 				EE633045230F26C20009E104 /* Constants.swift */,
+				EE9B95812582F54900726F08 /* StoreManager.swift */,
 			);
 			path = Spindown;
 			sourceTree = "<group>";
@@ -131,7 +134,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "Robotic Snail Software";
 				TargetAttributes = {
 					EEA8987B22B19CE2008EEC0D = {
@@ -181,6 +184,7 @@
 				EEA8988222B19CE2008EEC0D /* SceneDelegate.swift in Sources */,
 				EEA8988422B19CE2008EEC0D /* ContentView.swift in Sources */,
 				EEB795BB2302143600CFCF99 /* InfoView.swift in Sources */,
+				EE9B95822582F54900726F08 /* StoreManager.swift in Sources */,
 				EE35A37122C27D87006943D9 /* PlayerView.swift in Sources */,
 				EE633046230F26C20009E104 /* Constants.swift in Sources */,
 			);
@@ -226,6 +230,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -287,6 +292,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -321,20 +327,25 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Spindown/Spindown.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
-				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
+				CURRENT_PROJECT_VERSION = 12;
+				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_ASSET_PATHS = "Spindown/Preview\\ Content";
 				DEVELOPMENT_TEAM = JANZDS5D43;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Spindown/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.3;
+				MARKETING_VERSION = 2020.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.Spindown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_VERSION = 5.0;
@@ -347,20 +358,25 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Spindown/Spindown.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
-				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
+				CURRENT_PROJECT_VERSION = 12;
+				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_ASSET_PATHS = "Spindown/Preview\\ Content";
 				DEVELOPMENT_TEAM = JANZDS5D43;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Spindown/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.3;
+				MARKETING_VERSION = 2020.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.Spindown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_VERSION = 5.0;

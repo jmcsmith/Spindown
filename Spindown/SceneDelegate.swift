@@ -25,6 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = UIHostingController(rootView:ContentView().environmentObject(ScoreManager()))
             self.window = window
             window.makeKeyAndVisible()
+            
+//d
         }
     }
     

@@ -15,6 +15,8 @@ struct InfoView: View {
     let defaults = UserDefaults.standard
     @State var current = 0
     @EnvironmentObject var manager: ScoreManager
+    @StateObject var storeManager: StoreManager
+
     
     var body: some View {
         NavigationView {
@@ -138,6 +140,32 @@ struct InfoView: View {
                     
                 }
                 #endif
+                if storeManager.myProducts.count > 0 {
+                Section(header: Text("Tips")) {
+                    ForEach(storeManager.myProducts.sorted(by: { $0.price.decimalValue < $1.price.decimalValue }), id: \.self) { product in
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(product.localizedTitle)
+                                    .font(.headline)
+                                Text(product.localizedDescription)
+                                    .font(.caption2)
+                            }
+                            Spacer()
+//                            if UserDefaults.standard.bool(forKey: product.productIdentifier) {
+//                                Text("Purchased")
+//                                    .foregroundColor(.green)
+//                            } else {
+                                Button(action: {
+                                    storeManager.purchaseProduct(product: product)
+                                }) {
+                                    Text("$\(product.price)")
+                                }
+                                .foregroundColor(.blue)
+//                            }
+                        }
+                    }
+                }
+                }
                 Section(header: Text("About")) {
                     HStack {
                         Image("privacy")
@@ -205,10 +233,4 @@ struct InfoView: View {
     
 }
 
-#if DEBUG
-struct InfoView_Previews: PreviewProvider {
-    static var previews: some View {
-        InfoView(showingModal: .constant(true))
-    }
-}
-#endif
+
