@@ -16,7 +16,8 @@ struct InfoView: View {
     @State var current = 0
     @EnvironmentObject var manager: ScoreManager
     @StateObject var storeManager: StoreManager
-
+    @AppStorage("tiptotal", store: UserDefaults.standard) var tipTotal: Double = 0.0
+    
     
     var body: some View {
         NavigationView {
@@ -60,7 +61,7 @@ struct InfoView: View {
                                     self.current = 20
                                     self.defaults.set(20, forKey: "startingHealth")
                                     self.manager.reset = true
-                            }
+                                }
                             Text("30")
                                 .foregroundColor(Color.white)
                                 
@@ -72,7 +73,7 @@ struct InfoView: View {
                                     self.current = 30
                                     self.defaults.set(30, forKey: "startingHealth")
                                     self.manager.reset = true
-                            }
+                                }
                             Text("40")
                                 .foregroundColor(Color.white)
                                 
@@ -84,9 +85,9 @@ struct InfoView: View {
                                     self.current = 40
                                     self.defaults.set(40, forKey: "startingHealth")
                                     self.manager.reset = true
-                            }
+                                }
                         }
-                                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                     }
                 }
                 #if !targetEnvironment(macCatalyst)
@@ -141,30 +142,25 @@ struct InfoView: View {
                 }
                 #endif
                 if storeManager.myProducts.count > 0 {
-                Section(header: Text("Tips")) {
-                    ForEach(storeManager.myProducts.sorted(by: { $0.price.decimalValue < $1.price.decimalValue }), id: \.self) { product in
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(product.localizedTitle)
-                                    .font(.headline)
-                                Text(product.localizedDescription)
-                                    .font(.caption2)
-                            }
-                            Spacer()
-//                            if UserDefaults.standard.bool(forKey: product.productIdentifier) {
-//                                Text("Purchased")
-//                                    .foregroundColor(.green)
-//                            } else {
+                    Section(header: Text("Tips"), footer: Text(getTipText())) {
+                        ForEach(storeManager.myProducts.sorted(by: { $0.price.decimalValue < $1.price.decimalValue }), id: \.self) { product in
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(product.localizedTitle)
+                                        .font(.headline)
+                                    Text(product.localizedDescription)
+                                        .font(.caption2)
+                                }
+                                Spacer()
                                 Button(action: {
                                     storeManager.purchaseProduct(product: product)
                                 }) {
                                     Text("$\(product.price)")
                                 }
-                                .foregroundColor(.blue)
-//                            }
+                                .foregroundColor(.blue)                        }
+                            
                         }
                     }
-                }
                 }
                 Section(header: Text("About")) {
                     HStack {
@@ -172,11 +168,11 @@ struct InfoView: View {
                             .resizable()
                             .frame(width: 20, height: 20, alignment: .center)
                         Button(action: {
-                            if let url = URL(string: "https://www.roboticsnailsoftware.com/sd/privacy.html"){
-                                UIApplication.shared.open(url, options:[:], completionHandler: nil)
-                            }}) {
-                                Text("Privacy")
-                                    .foregroundColor(.primary)
+                                if let url = URL(string: "https://www.roboticsnailsoftware.com/sd/privacy.html"){
+                                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
+                                }}) {
+                            Text("Privacy")
+                                .foregroundColor(.primary)
                         }
                         
                     }
@@ -185,11 +181,11 @@ struct InfoView: View {
                             .resizable()
                             .frame(width: 20, height: 20, alignment: .center)
                         Button(action: {
-                            if let url = URL(string: "https://twitter.com/roboticsnailsw"){
-                                UIApplication.shared.open(url, options:[:], completionHandler: nil)
-                            }}) {
-                                Text("Support - @RoboticSnailSoftware")
-                                    .foregroundColor(.primary)
+                                if let url = URL(string: "https://twitter.com/roboticsnailsw"){
+                                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
+                                }}) {
+                            Text("Support - @RoboticSnailSoftware")
+                                .foregroundColor(.primary)
                         }
                     }
                     
@@ -198,11 +194,11 @@ struct InfoView: View {
                             .resizable()
                             .frame(width: 20, height: 20, alignment: .center)
                         Button(action: {
-                            if let url = URL(string: "https://www.roboticsnailsoftware.com"){
-                                UIApplication.shared.open(url, options:[:], completionHandler: nil)
-                            }}) {
-                                Text("Website - RoboticSnailSoftware.com")
-                                    .foregroundColor(.primary)
+                                if let url = URL(string: "https://www.roboticsnailsoftware.com"){
+                                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
+                                }}) {
+                            Text("Website - RoboticSnailSoftware.com")
+                                .foregroundColor(.primary)
                         }
                     }
                     HStack {
@@ -210,7 +206,13 @@ struct InfoView: View {
                             .resizable()
                             .frame(width: 20, height: 20, alignment: .center)
                         Button(action: {
-                            SKStoreReviewController.requestReview()
+                            if #available(iOS 14.0, *) {
+                                if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                                    SKStoreReviewController.requestReview(in: scene)
+                                }
+                            } else {
+                                SKStoreReviewController.requestReview()
+                            }
                         }) {
                             Text("Rate Spindown")
                                 .foregroundColor(.primary)
@@ -221,16 +223,28 @@ struct InfoView: View {
             .listStyle(GroupedListStyle())
             .navigationBarTitle(Text("Information"), displayMode: .inline)
             .navigationBarItems(trailing:
-                Button(action: {
-                    self.showingModal.toggle()
-                }) {
-                    Text("Close")
-            })
+                                    Button(action: {
+                                        self.showingModal.toggle()
+                                    }) {
+                                        Text("Close")
+                                    })
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .onAppear { self.current = self.defaults.integer(forKey: "startingHealth") }
+        .onAppear {
+            self.current = self.defaults.integer(forKey: "startingHealth")
+       
+        }
     }
-    
+    private func getTipText() -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        if tipTotal <= 0.0 {
+            return ""
+        }
+        return "Thank you for your total tips of \(formatter.string(for: tipTotal) ?? "") 🎉🎉🎉"
+        //NumberFormatter.currency.string(from: NSNumber(value: tipTotal)) ?? "0")")
+    }
 }
+
 
 

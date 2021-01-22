@@ -15,6 +15,7 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     var request: SKProductsRequest!
     
     @Published var myProducts = [SKProduct]()
+    @Published var purchasesTotal = 0.0
     
     func getProducts(productIDs: [String]) {
         print("Start requesting products ...")
@@ -50,6 +51,13 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
         if SKPaymentQueue.canMakePayments() {
             let payment = SKPayment(product: product)
             SKPaymentQueue.default().add(payment)
+            var tipTotal = UserDefaults.standard.double(forKey: "tiptotal")
+            print(payment.productIdentifier)
+
+                tipTotal += Double(truncating: myProducts.first(where: {$0.productIdentifier == payment.productIdentifier})?.price ?? 0.0)
+
+            print(tipTotal)
+            UserDefaults.standard.setValue(tipTotal, forKey: "tiptotal")
         } else {
             print("User can't make payment.")
         }
