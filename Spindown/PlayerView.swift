@@ -38,7 +38,7 @@ struct PlayerView : View {
         
         ZStack(alignment: .center) {
             Text(String(self.manager.scores.isEmpty ? startingLife.description : self.manager.scores[self.scoreIndex].data.description))
-                
+            
                 .font(.system(size: 90))
                 .foregroundColor(Color.init("LifeTotal"))
                 .fontWeight(.bold)
@@ -69,9 +69,9 @@ struct PlayerView : View {
                         .font(.system(size: 40))
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .bottomTrailing)
                 }
-                    
+                
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-                    
+                
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: buttonPadding ? paddingAmount : 0, trailing: 0))
                 
                 
