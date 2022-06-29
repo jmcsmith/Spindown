@@ -89,6 +89,7 @@ struct InfoView: View {
                         }
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                     }
+                    .padding(4)
                 }
                 #if !targetEnvironment(macCatalyst)
                 Section(header: Text("Icons"), footer: Text("")) {
@@ -110,7 +111,7 @@ struct InfoView: View {
                             Text("Light")
                                 .foregroundColor(.primary)
                         }
-                        if icon != "AppIcon-2" {
+                        if icon != "DarkIcon" {
                             Image(systemName: "checkmark")
                                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
                         }
@@ -121,19 +122,19 @@ struct InfoView: View {
                             .frame(width: 29, height: 29, alignment: .center)
                             .cornerRadius(5.088)
                         Button(action: {
-                            UIApplication.shared.setAlternateIconName("AppIcon-2") { error in
+                            UIApplication.shared.setAlternateIconName("DarkIcon") { error in
                                 if let error = error {
                                     print(error.localizedDescription)
                                 } else {
                                     print("Success!")
-                                    self.icon = "AppIcon-2"
+                                    self.icon = "DarkIcon"
                                 }
                             }
                         }) {
                             Text("Dark")
                                 .foregroundColor(.primary)
                         }
-                        if icon == "AppIcon-2" {
+                        if icon == "DarkIcon" {
                             Image(systemName: "checkmark")
                                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .trailing)
                         }
@@ -165,6 +166,7 @@ struct InfoView: View {
                 Section(header: Text("About")) {
                     HStack {
                         Image("privacy")
+                        
                             .resizable()
                             .frame(width: 20, height: 20, alignment: .center)
                         Button(action: {
@@ -190,7 +192,7 @@ struct InfoView: View {
                     }
                     
                     HStack {
-                        Image("globe")
+                        Image(systemName: "globe")
                             .resizable()
                             .frame(width: 20, height: 20, alignment: .center)
                         Button(action: {
@@ -220,7 +222,7 @@ struct InfoView: View {
                     }
                 }
             }
-            .listStyle(GroupedListStyle())
+            .listStyle(.insetGrouped)
             .navigationBarTitle(Text("Information"), displayMode: .inline)
             .navigationBarItems(trailing:
                                     Button(action: {
@@ -229,7 +231,7 @@ struct InfoView: View {
                                         Text("Close")
                                     })
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+       
         .onAppear {
             self.current = self.defaults.integer(forKey: "startingHealth")
        

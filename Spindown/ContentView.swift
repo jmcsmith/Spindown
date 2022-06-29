@@ -66,85 +66,107 @@ struct ContentView : View {
             .edgesIgnoringSafeArea(.top)
             
             HStack(alignment: .center) {
-                #if !targetEnvironment(macCatalyst)
-                Button(action: { self.showingSheet = true } ) {
+                Menu {
+                    Button(action: {
+                        self.manager.reset = true
+                        self.playerCount = 2
+                    }, label: {
+                        Text("2 Players")
+                    })
+                    Button(action: {
+                        self.manager.reset = true
+                        self.playerCount = 3
+                    }, label: {
+                        Text("3 Players")
+                    })
+                    Button(action: {
+                        self.manager.reset = true
+                        self.playerCount = 4
+                    }, label: {
+                        Text("4 Players")
+                    })
+                } label: {
                     Image(systemName: "person.3")
-                }.actionSheet(isPresented: $showingSheet, content: {
-                    self.playerSheet
-                })
+                }
+//                #if !targetEnvironment(macCatalyst)
+//                Button(action: { self.showingSheet = true } ) {
+//                    Image(systemName: "person.3")
+//                }.actionSheet(isPresented: $showingSheet, content: {
+//                    self.playerSheet
+//                })
+//                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+//                #else
+//                Button(action: { self.showingSheet = true } ) {
+//                    Image(systemName: "person.3")
+//                }.popover(isPresented: $showingSheet, content: {
+//                    VStack {
+//                        Text("Number of Players")
+//
+//                            .padding()
+//                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+//                        GeometryReader { geometry in
+//                            Button(action: {
+//                                self.manager.reset = true
+//                                self.playerCount = 2
+//                                self.showingSheet = false
+//                            }) {
+//                                Text("2")
+//                                    .frame(
+//                                        minWidth: (geometry.size.width / 2) - 25,
+//                                        maxWidth: .infinity, minHeight: 44
+//                                    )
+//                                    .font(Font.subheadline.weight(.bold))
+//                                    .background(Color.gray).opacity(0.8)
+//                                    .foregroundColor(Color.white)
+//                                    .cornerRadius(12)
+//                            }    .lineLimit(2)
+//                            .multilineTextAlignment(.center)
+//                            //.padding([.leading,.trailing], 5)
+//                        }
+//                        .padding()
+//                        GeometryReader { geometry in
+//                            Button(action: {
+//                                self.manager.reset = true
+//                                self.playerCount = 3
+//                                self.showingSheet = false
+//                            }) {
+//                                Text("3")
+//                                    .frame(
+//                                        minWidth: (geometry.size.width / 2) - 25,
+//                                        maxWidth: .infinity, minHeight: 44
+//                                    )
+//                                    .font(Font.subheadline.weight(.bold))
+//                                    .background(Color.gray).opacity(0.8)
+//                                    .foregroundColor(Color.white)
+//                                    .cornerRadius(12)
+//                            }.lineLimit(2)
+//                            .multilineTextAlignment(.center)
+//
+//                        } .padding()
+//                        GeometryReader { geometry in
+//                            Button(action: {
+//                                self.manager.reset = true
+//                                self.playerCount = 4
+//                                self.showingSheet = false
+//                            }) {
+//                                Text("4")
+//                                    .frame(
+//                                        minWidth: (geometry.size.width / 2) - 25,
+//                                        maxWidth: .infinity, minHeight: 44
+//                                    )
+//                                    .font(Font.subheadline.weight(.bold))
+//                                    .background(Color.gray).opacity(0.8)
+//                                    .foregroundColor(Color.white)
+//                                    .cornerRadius(12)
+//                            }.lineLimit(2)
+//                            .multilineTextAlignment(.center)
+//
+//                        } .padding()
+//                    }.padding()
+//                    .background(Color.gray.opacity(0.2))
+//                })
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-                #else
-                Button(action: { self.showingSheet = true } ) {
-                    Image(systemName: "person.3")
-                }.popover(isPresented: $showingSheet, content: {
-                    VStack {
-                        Text("Number of Players")
-                            
-                            .padding()
-                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-                        GeometryReader { geometry in
-                            Button(action: {
-                                self.manager.reset = true
-                                self.playerCount = 2
-                                self.showingSheet = false
-                            }) {
-                                Text("2")
-                                    .frame(
-                                        minWidth: (geometry.size.width / 2) - 25,
-                                        maxWidth: .infinity, minHeight: 44
-                                    )
-                                    .font(Font.subheadline.weight(.bold))
-                                    .background(Color.gray).opacity(0.8)
-                                    .foregroundColor(Color.white)
-                                    .cornerRadius(12)
-                            }    .lineLimit(2)
-                            .multilineTextAlignment(.center)
-                            //.padding([.leading,.trailing], 5)
-                        }
-                        .padding()
-                        GeometryReader { geometry in
-                            Button(action: {
-                                self.manager.reset = true
-                                self.playerCount = 3
-                                self.showingSheet = false
-                            }) {
-                                Text("3")
-                                    .frame(
-                                        minWidth: (geometry.size.width / 2) - 25,
-                                        maxWidth: .infinity, minHeight: 44
-                                    )
-                                    .font(Font.subheadline.weight(.bold))
-                                    .background(Color.gray).opacity(0.8)
-                                    .foregroundColor(Color.white)
-                                    .cornerRadius(12)
-                            }.lineLimit(2)
-                            .multilineTextAlignment(.center)
-                            
-                        } .padding()
-                        GeometryReader { geometry in
-                            Button(action: {
-                                self.manager.reset = true
-                                self.playerCount = 4
-                                self.showingSheet = false
-                            }) {
-                                Text("4")
-                                    .frame(
-                                        minWidth: (geometry.size.width / 2) - 25,
-                                        maxWidth: .infinity, minHeight: 44
-                                    )
-                                    .font(Font.subheadline.weight(.bold))
-                                    .background(Color.gray).opacity(0.8)
-                                    .foregroundColor(Color.white)
-                                    .cornerRadius(12)
-                            }.lineLimit(2)
-                            .multilineTextAlignment(.center)
-                            
-                        } .padding()
-                    }.padding()
-                    .background(Color.gray.opacity(0.2))
-                })
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-                #endif
+//                #endif
                 Button(action: {
                         self.manager.reset = true
                         print("reset tapped")} ) {
@@ -169,7 +191,7 @@ struct ContentView : View {
                 
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 20, alignment: .center)
-            .padding(3)
+            .padding(6)
             HStack {
                 PlayerView(buttonPadding: false)
                     .background(SwiftUI.Color.green.edgesIgnoringSafeArea(.all))
