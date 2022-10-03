@@ -158,8 +158,8 @@ struct InfoView: View {
                                 }) {
                                     Text("$\(product.price)")
                                 }
-                                .foregroundColor(.blue)                        }
-                            
+                                .foregroundColor(.blue)
+                            }
                         }
                     }
                 }
@@ -170,7 +170,7 @@ struct InfoView: View {
                             .resizable()
                             .frame(width: 20, height: 20, alignment: .center)
                         Button(action: {
-                                if let url = URL(string: "https://www.roboticsnailsoftware.com/sd/privacy.html"){
+                                if let url = URL(string: "https://www.roboticsnailsoftware.com/sd/privacy-policy"){
                                     UIApplication.shared.open(url, options:[:], completionHandler: nil)
                                 }}) {
                             Text("Privacy")
@@ -208,13 +208,9 @@ struct InfoView: View {
                             .resizable()
                             .frame(width: 20, height: 20, alignment: .center)
                         Button(action: {
-                            if #available(iOS 14.0, *) {
                                 if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
                                     SKStoreReviewController.requestReview(in: scene)
                                 }
-                            } else {
-                                SKStoreReviewController.requestReview()
-                            }
                         }) {
                             Text("Rate Spindown")
                                 .foregroundColor(.primary)

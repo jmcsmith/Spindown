@@ -17,6 +17,8 @@
 		EEA8988622B19CE5008EEC0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEA8988522B19CE5008EEC0D /* Assets.xcassets */; };
 		EEA8988922B19CE5008EEC0D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEA8988822B19CE5008EEC0D /* Preview Assets.xcassets */; };
 		EEA8988C22B19CE5008EEC0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEA8988A22B19CE5008EEC0D /* LaunchScreen.storyboard */; };
+		EEAAB5B3230F10A80076CCA6 /* dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEAAB5B2230F10A80076CCA6 /* dark@2x.png */; };
+		EEAAB5B5230F10BA0076CCA6 /* dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEAAB5B4230F10BA0076CCA6 /* dark@3x.png */; };
 		EEB795BB2302143600CFCF99 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB795BA2302143600CFCF99 /* InfoView.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +36,8 @@
 		EEA8988B22B19CE5008EEC0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EEA8988D22B19CE5008EEC0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EEA8989322B19D06008EEC0D /* Spindown.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Spindown.entitlements; sourceTree = "<group>"; };
+		EEAAB5B2230F10A80076CCA6 /* dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dark@2x.png"; sourceTree = "<group>"; };
+		EEAAB5B4230F10BA0076CCA6 /* dark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dark@3x.png"; sourceTree = "<group>"; };
 		EEB795BA2302143600CFCF99 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,6 +87,8 @@
 				EEA8988322B19CE2008EEC0D /* ContentView.swift */,
 				EEA8988522B19CE5008EEC0D /* Assets.xcassets */,
 				EEA8988A22B19CE5008EEC0D /* LaunchScreen.storyboard */,
+				EEAAB5B2230F10A80076CCA6 /* dark@2x.png */,
+				EEAAB5B4230F10BA0076CCA6 /* dark@3x.png */,
 				EEA8988D22B19CE5008EEC0D /* Info.plist */,
 				EEA8988722B19CE5008EEC0D /* Preview Content */,
 				EE35A37022C27D87006943D9 /* PlayerView.swift */,
@@ -160,8 +166,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEA8988C22B19CE5008EEC0D /* LaunchScreen.storyboard in Resources */,
+				EEAAB5B5230F10BA0076CCA6 /* dark@3x.png in Resources */,
 				EEA8988922B19CE5008EEC0D /* Preview Assets.xcassets in Resources */,
 				EEA8988622B19CE5008EEC0D /* Assets.xcassets in Resources */,
+				EEAAB5B3230F10A80076CCA6 /* dark@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,25 +325,26 @@
 		EEA8989122B19CE5008EEC0D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = DarkIcon;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Spindown/Spindown.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_ASSET_PATHS = "Spindown/Preview\\ Content";
 				DEVELOPMENT_TEAM = JANZDS5D43;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Spindown/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Spindown;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2022.1;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.Spindown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -345,32 +354,33 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
 		EEA8989222B19CE5008EEC0D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = DarkIcon;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Spindown/Spindown.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_ASSET_PATHS = "Spindown/Preview\\ Content";
 				DEVELOPMENT_TEAM = JANZDS5D43;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Spindown/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Spindown;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2022.1;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.Spindown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -380,7 +390,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Release;
 		};
