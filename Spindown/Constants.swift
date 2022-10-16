@@ -30,8 +30,42 @@ struct DeviceTypes {
     static let isiPad                   = idiom == .pad && ScreenSize.maxLength >= 1024.0
     
     static func isiPhoneXAspectRatio() -> Bool {
-        return isiPhoneX || isiPhoneXsMax || isiPhoneXr
+//        return isiPhoneX || isiPhoneXsMax || isiPhoneXr
+        return UIDevice.current.hasNotch && idiom == .phone
     }
     
     //Note: If making an iPad specific app, will need to look up and add all the various iPad screen heights.
+}
+extension UIDevice {
+    var hasNotch: Bool {
+        let keyWindow = UIApplication
+            .shared
+            .connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+            .first { $0.isKeyWindow }
+        
+        guard let window = keyWindow else { return false }
+        if UIDevice.current.orientation.isPortrait {
+            return window.safeAreaInsets.top >= 44
+        } else {
+            return window.safeAreaInsets.left > 0 || window.safeAreaInsets.right > 0
+        }
+    }
+}
+extension UIApplication {
+    
+    var keyWindow: UIWindow? {
+        // Get connected scenes
+        return UIApplication.shared.connectedScenes
+            // Keep only active scenes, onscreen and visible to the user
+            .filter { $0.activationState == .foregroundActive }
+            // Keep only the first `UIWindowScene`
+            .first(where: { $0 is UIWindowScene })
+            // Get its associated windows
+            .flatMap({ $0 as? UIWindowScene })?.windows
+            // Finally, keep only the key window
+            .first(where: \.isKeyWindow)
+    }
+    
 }

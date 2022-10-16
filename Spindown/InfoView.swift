@@ -17,7 +17,7 @@ struct InfoView: View {
     @EnvironmentObject var manager: ScoreManager
     @StateObject var storeManager: StoreManager
     @AppStorage("tiptotal", store: UserDefaults.standard) var tipTotal: Double = 0.0
-    
+    @AppStorage("flipFirstRow", store: UserDefaults.standard) var flipFirstRow = false
     
     var body: some View {
         NavigationView {
@@ -27,10 +27,13 @@ struct InfoView: View {
                         HStack {
                             Image(systemName: "heart.fill")
                                 .resizable()
+                                .foregroundColor(.primary)
                                 .frame(width: 20, height: 20, alignment: .center)
                             Text("Starting Life")
+                                .foregroundColor(.primary)
                             Spacer()
                             Text("- " + self.current.description)
+                                .foregroundColor(.primary)
                             Stepper("", onIncrement: {
                                 var current = self.defaults.integer(forKey: "startingHealth")
                                 current += 1
@@ -90,6 +93,15 @@ struct InfoView: View {
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                     }
                     .padding(4)
+                    #if targetEnvironment(macCatalyst)
+                    HStack {
+//                        Text("Flip top Players")
+//                            .foregroundColor(.primary)
+                        Toggle("Flip top Players", isOn: $flipFirstRow)
+                            .foregroundColor(.primary)
+                    }
+                    .padding(4)
+                    #endif
                 }
                 #if !targetEnvironment(macCatalyst)
                 Section(header: Text("Icons"), footer: Text("")) {
@@ -149,8 +161,10 @@ struct InfoView: View {
                                 VStack(alignment: .leading) {
                                     Text(product.localizedTitle)
                                         .font(.headline)
+                                        .foregroundColor(.primary)
                                     Text(product.localizedDescription)
                                         .font(.caption2)
+                                        .foregroundColor(.primary)
                                 }
                                 Spacer()
                                 Button(action: {
@@ -168,6 +182,7 @@ struct InfoView: View {
                         Image("privacy")
                         
                             .resizable()
+                            .foregroundColor(.primary)
                             .frame(width: 20, height: 20, alignment: .center)
                         Button(action: {
                                 if let url = URL(string: "https://www.roboticsnailsoftware.com/sd/privacy-policy"){
@@ -181,6 +196,8 @@ struct InfoView: View {
                     HStack {
                         Image("twitter")
                             .resizable()
+                            .foregroundColor(.primary)
+
                             .frame(width: 20, height: 20, alignment: .center)
                         Button(action: {
                                 if let url = URL(string: "https://twitter.com/roboticsnailsw"){
@@ -194,6 +211,8 @@ struct InfoView: View {
                     HStack {
                         Image(systemName: "globe")
                             .resizable()
+                            .foregroundColor(.primary)
+
                             .frame(width: 20, height: 20, alignment: .center)
                         Button(action: {
                                 if let url = URL(string: "https://www.roboticsnailsoftware.com"){
@@ -206,6 +225,8 @@ struct InfoView: View {
                     HStack {
                         Image(systemName: "star.fill")
                             .resizable()
+                            .foregroundColor(.primary)
+
                             .frame(width: 20, height: 20, alignment: .center)
                         Button(action: {
                                 if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {

@@ -17,6 +17,7 @@ struct ContentView : View {
     
     @EnvironmentObject var manager: ScoreManager
     @StateObject var storeManager = StoreManager ()
+    @AppStorage("flipFirstRow", store: UserDefaults.standard) var flipFirstRow = false
     
     let productIDs = [
         //Use your product IDs instead
@@ -53,14 +54,14 @@ struct ContentView : View {
         VStack(alignment: .center, spacing: 0) {
             
             HStack {
-                PlayerView(buttonPadding: true)
-                    .background(Color.red.edgesIgnoringSafeArea(.all))
-                    .rotationEffect(Angle(degrees: 180.0))
+                PlayerView(buttonPadding: !flipFirstRow)
+                    .background(Color.red.edgesIgnoringSafeArea(.top))
+                    .rotationEffect(Angle(degrees: flipFirstRow ? 0 : 180.0))
                 
                 if playerCount > 2 {
-                    PlayerView(buttonPadding: true)
-                        .background(Color.orange.edgesIgnoringSafeArea(.all))
-                        .rotationEffect(Angle(degrees: 180.0))
+                    PlayerView(buttonPadding: !flipFirstRow)
+                        .background(Color.orange.edgesIgnoringSafeArea(.top))
+                        .rotationEffect(Angle(degrees: flipFirstRow ? 0 : 180.0))
                 }
             }
             .edgesIgnoringSafeArea(.top)
@@ -87,117 +88,40 @@ struct ContentView : View {
                     })
                 } label: {
                     Image(systemName: "person.3")
+                        .foregroundColor(.blue)
                 }
-//                #if !targetEnvironment(macCatalyst)
-//                Button(action: { self.showingSheet = true } ) {
-//                    Image(systemName: "person.3")
-//                }.actionSheet(isPresented: $showingSheet, content: {
-//                    self.playerSheet
-//                })
-//                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-//                #else
-//                Button(action: { self.showingSheet = true } ) {
-//                    Image(systemName: "person.3")
-//                }.popover(isPresented: $showingSheet, content: {
-//                    VStack {
-//                        Text("Number of Players")
-//
-//                            .padding()
-//                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-//                        GeometryReader { geometry in
-//                            Button(action: {
-//                                self.manager.reset = true
-//                                self.playerCount = 2
-//                                self.showingSheet = false
-//                            }) {
-//                                Text("2")
-//                                    .frame(
-//                                        minWidth: (geometry.size.width / 2) - 25,
-//                                        maxWidth: .infinity, minHeight: 44
-//                                    )
-//                                    .font(Font.subheadline.weight(.bold))
-//                                    .background(Color.gray).opacity(0.8)
-//                                    .foregroundColor(Color.white)
-//                                    .cornerRadius(12)
-//                            }    .lineLimit(2)
-//                            .multilineTextAlignment(.center)
-//                            //.padding([.leading,.trailing], 5)
-//                        }
-//                        .padding()
-//                        GeometryReader { geometry in
-//                            Button(action: {
-//                                self.manager.reset = true
-//                                self.playerCount = 3
-//                                self.showingSheet = false
-//                            }) {
-//                                Text("3")
-//                                    .frame(
-//                                        minWidth: (geometry.size.width / 2) - 25,
-//                                        maxWidth: .infinity, minHeight: 44
-//                                    )
-//                                    .font(Font.subheadline.weight(.bold))
-//                                    .background(Color.gray).opacity(0.8)
-//                                    .foregroundColor(Color.white)
-//                                    .cornerRadius(12)
-//                            }.lineLimit(2)
-//                            .multilineTextAlignment(.center)
-//
-//                        } .padding()
-//                        GeometryReader { geometry in
-//                            Button(action: {
-//                                self.manager.reset = true
-//                                self.playerCount = 4
-//                                self.showingSheet = false
-//                            }) {
-//                                Text("4")
-//                                    .frame(
-//                                        minWidth: (geometry.size.width / 2) - 25,
-//                                        maxWidth: .infinity, minHeight: 44
-//                                    )
-//                                    .font(Font.subheadline.weight(.bold))
-//                                    .background(Color.gray).opacity(0.8)
-//                                    .foregroundColor(Color.white)
-//                                    .cornerRadius(12)
-//                            }.lineLimit(2)
-//                            .multilineTextAlignment(.center)
-//
-//                        } .padding()
-//                    }.padding()
-//                    .background(Color.gray.opacity(0.2))
-//                })
+                .menuStyle(.borderlessButton)
+
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-//                #endif
                 Button(action: {
-                        self.manager.reset = true
-                        print("reset tapped")} ) {
-                    Image(systemName: "arrow.clockwise")
-                }
-                
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                    self.manager.reset = true
+                    print("reset tapped")} ) {
+                        Image(systemName: "arrow.clockwise")
+                    }
+                    .buttonStyle(.borderless)
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                 Button(action: { self.showingInfo = true } ) {
                     Image(systemName: "gear")
-                    //.padding(.vertical, 10.0)
                 }.sheet(isPresented: $showingInfo, content: {
                     InfoView(showingModal: self.$showingInfo, storeManager: storeManager).environmentObject(self.manager)
                         .onAppear {
-                            
                             if !(storeManager.myProducts.count > 0) {
                                 SKPaymentQueue.default().add(storeManager)
                                 storeManager.getProducts(productIDs: productIDs)
                             }
                         }
                 })
+                .buttonStyle(.borderless)
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-                
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 20, alignment: .center)
             .padding(6)
             HStack {
                 PlayerView(buttonPadding: false)
-                    .background(SwiftUI.Color.green.edgesIgnoringSafeArea(.all))
+                    .background(SwiftUI.Color.green.edgesIgnoringSafeArea(.bottom))
                 if playerCount > 3 {
                     PlayerView(buttonPadding: false)
-                        .background(SwiftUI.Color.purple.edgesIgnoringSafeArea(.all))
+                        .background(SwiftUI.Color.purple.edgesIgnoringSafeArea(.bottom))
                 }
             }
         }
@@ -241,10 +165,10 @@ struct DebugBorder: ViewModifier {
 
 extension View {
     func debugBorder(color: Color = .blue) -> some View {
-        #if DEBUG
+#if DEBUG
         return self.overlay(Rectangle().stroke(color))
-        #else
+#else
         return self
-        #endif
+#endif
     }
 }

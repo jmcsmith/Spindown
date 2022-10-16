@@ -57,6 +57,7 @@ struct PlayerView : View {
                         .multilineTextAlignment(.trailing)
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .bottomLeading)
                 }
+                .buttonStyle(.borderless)
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: buttonPadding ? paddingAmount : 0, trailing: 0))
                 Button(action: {
@@ -69,7 +70,7 @@ struct PlayerView : View {
                         .font(.system(size: 40))
                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .bottomTrailing)
                 }
-                
+                .buttonStyle(.borderless)
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                 
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: buttonPadding ? paddingAmount : 0, trailing: 0))
