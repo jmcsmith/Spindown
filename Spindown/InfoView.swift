@@ -157,23 +157,25 @@ struct InfoView: View {
                 if storeManager.myProducts.count > 0 {
                     Section(header: Text("Tips"), footer: Text(getTipText())) {
                         ForEach(storeManager.myProducts.sorted(by: { $0.price.decimalValue < $1.price.decimalValue }), id: \.self) { product in
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(product.localizedTitle)
-                                        .font(.headline)
-                                        .foregroundColor(.primary)
-                                    Text(product.localizedDescription)
-                                        .font(.caption2)
-                                        .foregroundColor(.primary)
-                                }
-                                Spacer()
-                                Button(action: {
-                                    storeManager.purchaseProduct(product: product)
-                                }) {
-                                    Text("$\(product.price)")
-                                }
-                                .foregroundColor(.blue)
-                            }
+//                            HStack {
+//                                VStack(alignment: .leading) {
+//                                    Text(product.localizedTitle)
+//                                        .font(.headline)
+//                                        .foregroundColor(.primary)
+//                                    Text(product.localizedDescription)
+//                                        .font(.caption2)
+//                                        .foregroundColor(.primary)
+//                                }
+//                                Spacer()
+//                                Button(action: {
+//                                    storeManager.purchaseProduct(product: product)
+//                                }) {
+//                                    Text("$\(product.price)")
+//                                }
+//                                .foregroundColor(.blue)
+//                            }
+                            ProductView(id: product.productIdentifier)
+                                .productViewStyle(.compact)
                         }
                     }
                 }
@@ -193,21 +195,21 @@ struct InfoView: View {
                         }
                         
                     }
-                    HStack {
-                        Image("twitter")
-                            .resizable()
-                            .foregroundColor(.primary)
-
-                            .frame(width: 20, height: 20, alignment: .center)
-                        Button(action: {
-                                if let url = URL(string: "https://twitter.com/roboticsnailsw"){
-                                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
-                                }}) {
-                            Text("Support - @RoboticSnailSoftware")
-                                .foregroundColor(.primary)
-                        }
-                    }
-                    
+//                    HStack {
+//                        Image("twitter")
+//                            .resizable()
+//                            .foregroundColor(.primary)
+//
+//                            .frame(width: 20, height: 20, alignment: .center)
+//                        Button(action: {
+//                                if let url = URL(string: "https://twitter.com/roboticsnailsw"){
+//                                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
+//                                }}) {
+//                            Text("Support - @RoboticSnailSoftware")
+//                                .foregroundColor(.primary)
+//                        }
+//                    }
+//                    
                     HStack {
                         Image(systemName: "globe")
                             .resizable()
