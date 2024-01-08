@@ -88,7 +88,7 @@ struct ContentView : View {
                     })
                 } label: {
                     Image(systemName: "person.3")
-                        .foregroundColor(.blue)
+//                        .foregroundColor(.blue)
                 }
                 .menuStyle(.borderlessButton)
 

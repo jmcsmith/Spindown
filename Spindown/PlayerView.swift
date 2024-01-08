@@ -25,11 +25,11 @@ struct PlayerView : View {
     init(buttonPadding: Bool) {
         score.data = startingLife
         self.buttonPadding = buttonPadding
-        if DeviceTypes.isiPhoneXAspectRatio() {
-            paddingAmount = 44
-        } else {
+//        if DeviceTypes.isiPhoneXAspectRatio() {
+//            paddingAmount = 44
+//        } else {
             paddingAmount = 20
-        }
+//        }
         
     }
     

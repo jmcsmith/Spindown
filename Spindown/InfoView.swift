@@ -102,8 +102,15 @@ struct InfoView: View {
                     }
                     .padding(4)
                     #endif
+                    #if os(visionOS)
+                    HStack {
+                        Toggle("Flip top Players", isOn: $flipFirstRow)
+                            .foregroundColor(.primary)
+                    }
+                    .padding(4)
+                    #endif
                 }
-                #if !targetEnvironment(macCatalyst)
+                #if os(iOS)
                 Section(header: Text("Icons"), footer: Text("")) {
                     HStack {
                         Image("light")
@@ -157,25 +164,25 @@ struct InfoView: View {
                 if storeManager.myProducts.count > 0 {
                     Section(header: Text("Tips"), footer: Text(getTipText())) {
                         ForEach(storeManager.myProducts.sorted(by: { $0.price.decimalValue < $1.price.decimalValue }), id: \.self) { product in
-//                            HStack {
-//                                VStack(alignment: .leading) {
-//                                    Text(product.localizedTitle)
-//                                        .font(.headline)
-//                                        .foregroundColor(.primary)
-//                                    Text(product.localizedDescription)
-//                                        .font(.caption2)
-//                                        .foregroundColor(.primary)
-//                                }
-//                                Spacer()
-//                                Button(action: {
-//                                    storeManager.purchaseProduct(product: product)
-//                                }) {
-//                                    Text("$\(product.price)")
-//                                }
-//                                .foregroundColor(.blue)
-//                            }
-                            ProductView(id: product.productIdentifier)
-                                .productViewStyle(.compact)
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(product.localizedTitle)
+                                        .font(.headline)
+                                        .foregroundColor(.primary)
+                                    Text(product.localizedDescription)
+                                        .font(.caption2)
+                                        .foregroundColor(.primary)
+                                }
+                                Spacer()
+                                Button(action: {
+                                    storeManager.purchaseProduct(product: product)
+                                }) {
+                                    Text("$\(product.price)")
+                                }
+                                .foregroundColor(.blue)
+                            }
+//                            ProductView(id: product.productIdentifier)
+//                                .productViewStyle(.compact)
                         }
                     }
                 }
