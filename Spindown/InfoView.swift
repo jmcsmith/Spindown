@@ -10,6 +10,7 @@ import SwiftUI
 import StoreKit
 
 struct InfoView: View {
+    @Environment(\.requestReview) var requestReview
     @Binding var showingModal:Bool
     @State var icon = UIApplication.shared.alternateIconName
     let defaults = UserDefaults.standard
@@ -188,63 +189,33 @@ struct InfoView: View {
                 }
                 Section(header: Text("About")) {
                     HStack {
-                        Image("privacy")
-                        
-                            .resizable()
-                            .foregroundColor(.primary)
-                            .frame(width: 20, height: 20, alignment: .center)
-                        Button(action: {
-                                if let url = URL(string: "https://www.roboticsnailsoftware.com/sd/privacy-policy"){
-                                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
-                                }}) {
-                            Text("Privacy")
-                                .foregroundColor(.primary)
-                        }
+                        Image("discord.fill")
+                            .symbolRenderingMode(.multicolor)
+                        Link("Support - Discord", destination: URL(string: "https://discord.gg/KN2MQX5a")!)
                         
                     }
-//                    HStack {
-//                        Image("twitter")
-//                            .resizable()
-//                            .foregroundColor(.primary)
-//
-//                            .frame(width: 20, height: 20, alignment: .center)
-//                        Button(action: {
-//                                if let url = URL(string: "https://twitter.com/roboticsnailsw"){
-//                                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
-//                                }}) {
-//                            Text("Support - @RoboticSnailSoftware")
-//                                .foregroundColor(.primary)
-//                        }
-//                    }
-//                    
                     HStack {
-                        Image(systemName: "globe")
-                            .resizable()
-                            .foregroundColor(.primary)
-
-                            .frame(width: 20, height: 20, alignment: .center)
-                        Button(action: {
-                                if let url = URL(string: "https://www.roboticsnailsoftware.com"){
-                                    UIApplication.shared.open(url, options:[:], completionHandler: nil)
-                                }}) {
-                            Text("Website - RoboticSnailSoftware.com")
-                                .foregroundColor(.primary)
-                        }
+                        Image(systemName: "globe.americas.fill")
+                            .foregroundColor(.blue)
+                        Link("Privacy Policy", destination: URL(string: "https://www.roboticsnailsoftware.com/sd/privacy-policy")!)
+                        
+                    }
+                    HStack {
+                        Image(systemName: "globe.americas.fill")
+                            .foregroundColor(.blue)
+                        Link("Robotic Snail Software - 🤖🐌", destination: URL(string: "https://www.roboticsnailsoftware.com")!)
+                        
                     }
                     HStack {
                         Image(systemName: "star.fill")
-                            .resizable()
-                            .foregroundColor(.primary)
-
-                            .frame(width: 20, height: 20, alignment: .center)
+                            .foregroundColor(.blue)
                         Button(action: {
-                                if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
-                                    SKStoreReviewController.requestReview(in: scene)
-                                }
-                        }) {
-                            Text("Rate Spindown")
-                                .foregroundColor(.primary)
-                        }
+                            requestReview()
+                        }, label: {
+                            Text("Rate My MTG")
+                                .font(.subheadline)
+                        })
+                        
                     }
                 }
             }

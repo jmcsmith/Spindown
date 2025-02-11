@@ -88,9 +88,12 @@ struct ContentView : View {
                     })
                 } label: {
                     Image(systemName: "person.3")
-//                        .foregroundColor(.blue)
+                    #if os(macOS)
+                        .foregroundColor(.blue)
+                    #endif
                 }
                 .menuStyle(.borderlessButton)
+                .buttonStyle(.borderless)
 
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                 Button(action: {
