@@ -212,7 +212,7 @@ struct InfoView: View {
                         Button(action: {
                             requestReview()
                         }, label: {
-                            Text("Rate My MTG")
+                            Text("Rate Spindown")
                                 .font(.subheadline)
                         })
                         
