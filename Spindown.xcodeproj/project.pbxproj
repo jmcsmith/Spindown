@@ -351,7 +351,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2025.1;
+				MARKETING_VERSION = 2025.2;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.Spindown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -389,7 +389,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2025.1;
+				MARKETING_VERSION = 2025.2;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.RoboticSnailSoftware.Spindown;
 				PRODUCT_NAME = "$(TARGET_NAME)";

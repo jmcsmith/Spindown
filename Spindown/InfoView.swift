@@ -187,13 +187,41 @@ struct InfoView: View {
                         }
                     }
                 }
-                Section(header: Text("About")) {
+                Section(content: {
                     HStack {
                         Image("discord.fill")
                             .symbolRenderingMode(.multicolor)
-                        Link("Support - Discord", destination: URL(string: "https://discord.gg/KN2MQX5a")!)
+                        Link("Discord", destination: URL(string: "https://discord.gg/KN2MQX5a")!)
                         
                     }
+                    HStack {
+                        Image("threads")
+                            .symbolRenderingMode(.multicolor)
+                        Link("Threads", destination: URL(string: "https://www.threads.net/@roboticsnailsoftware?igshid=NTc4MTIwNjQ2YQ==")!)
+                        
+                    }
+                    HStack {
+                        Image("bluesky")
+                            .symbolRenderingMode(.multicolor)
+                        Link("Bluesky", destination: URL(string: "https://bsky.app/profile/roboticsnail.bsky.social")!)
+                        
+                    }
+                    HStack {
+                        Image("mastodon")
+                            .symbolRenderingMode(.multicolor)
+                        Link("Mastodon", destination: URL(string: "https://indieapps.space/@roboticsnailsoftware")!)
+                        
+                    }
+                    HStack {
+                        Image("instagram")
+                            .symbolRenderingMode(.multicolor)
+                        Link("Instagram", destination: URL(string: "https://www.instagram.com/roboticsnailsoftware/")!)
+                        
+                    }
+                }, header: {
+                    Text("Social")
+                })
+                Section(header: Text("About")) {
                     HStack {
                         Image(systemName: "globe.americas.fill")
                             .foregroundColor(.blue)
